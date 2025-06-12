@@ -1,26 +1,42 @@
-<div class="container" id="login-container">
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow p-4">
-      <h2 class="text-center mb-4">Iniciar Sesión</h2>
-      <form>
-        <div class="mb-3">
-          <label for="email" class="form-label">Correo electrónico</label>
-          <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com" required>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Contraseña</label>
-          <input type="password" class="form-control" id="password" placeholder="••••••••" required>
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="remember">
-          <label class="form-check-label" for="remember">Recordarme</label>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Ingresar</button>
-      </form>
-      <div class="text-center mt-3">
-        <a href="#" class="text-decoration-none">¿Olvidaste tu contraseña?</a>
+<div class="login-container">
+  <div
+    class="container d-flex justify-content-center align-items-center vh-100"
+  >
+    <div class="card login-card shadow border-0 p-4">
+      <div class="card-body">
+        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        <form>
+          <div class="input-group mb-4">
+            <span class="input-group-text"> <i class="fas fa-user"></i> </span>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Usuario"
+              aria-label="Usuario"
+              required
+            />
+          </div>
+
+          <div class="input-group mb-4">
+            <span class="input-group-text"> <i class="fas fa-lock"></i> </span>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Contraseña"
+              aria-label="Contraseña"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 mb-3">
+            Ingresar
+          </button>
+
+          <div class="text-center">
+            <a href="#" class="change-password-link">Cambiar contraseña</a>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-
 </div>

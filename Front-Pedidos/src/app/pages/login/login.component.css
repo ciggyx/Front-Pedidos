@@ -1,5 +1,60 @@
-.card {
-  width: 100%;
-  max-width: 400px;
+/* Estilo para el contenedor principal que tendrá la imagen de fondo */
+.login-container {
+  /* La ruta parte de la carpeta 'src' */
+  background-image: url("../../../assets/images/god.webp");
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  width: 100vw; /* Ocupa todo el ancho de la pantalla */
 }
 
+/* Estilo para el modal/tarjeta de login */
+.login-card {
+  width: 100%;
+  max-width: 400px; /* Ancho máximo del formulario */
+  border-radius: 1rem; /* Bordes redondeados para el modal */
+}
+
+/* Estilo para los grupos de input (ícono + campo) */
+.input-group-text,
+.form-control {
+  border: none; /* Quitamos los bordes por defecto */
+  background-color: #f3f3f3; /* Color de fondo gris claro para los inputs */
+  border-radius: 50rem; /* Hacemos los bordes totalmente redondeados */
+}
+
+/* Ajuste específico para que el ícono y el input se unan correctamente */
+.input-group > .form-control {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group > .input-group-text {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Estilo para el botón de Ingresar */
+.btn-primary {
+  background-color: #0056b3; /* Azul similar al de la imagen */
+  border: none;
+  border-radius: 50rem; /* Bordes totalmente redondeados */
+  padding: 0.75rem 1.5rem;
+  font-weight: bold;
+}
+
+.btn-primary:hover {
+  background-color: #004494; /* Un azul un poco más oscuro para el hover */
+}
+
+/* Estilo para el enlace de 'Cambiar contraseña' */
+.change-password-link {
+  color: #6c757d; /* Color de texto gris */
+  text-decoration: none; /* Sin subrayado */
+  font-size: 0.9rem;
+}
+
+.change-password-link:hover {
+  text-decoration: underline; /* Subrayado al pasar el mouse */
+}
