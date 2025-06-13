@@ -1,5 +1,5 @@
 .login-wrapper {
-  background-image: url('../../../../assets/images/imagen.jpg'); /* cambiá el path si es necesario */
+  background-image: url('../../../../assets/images/imagen.jpg'); /* usá el mismo nombre si es el mismo fondo */
   background-size: cover;
   background-position: center;
   height: 100vh;
@@ -8,18 +8,50 @@
 
 .login-card {
   min-width: 350px;
-  background-color: rgba(255, 255, 255, 0.85); /* blanco con transparencia */
+  background-color: rgba(255, 255, 255, 0.555);
   border-radius: 12px;
   backdrop-filter: blur(4px);
 }
 
 .btn-login {
-  background-color: #e74c3c; /* rojo-anaranjado */
-  border-color: #e74c3c;
+  background-color: #007bff;
+  border-color: #000000;
   color: white;
 }
 
 .btn-login:hover {
-  background-color: #d8432b;
-  border-color: #d8432b;
+  background-color: #0069d9;
+  border-color: #0062cc;
 }
+.text-center a {
+  text-decoration: underline;
+  color: #0d6efd; /* celeste Bootstrap */
+}
+
+.text-center a:hover {
+  color: #0a58ca; /* tono más oscuro al pasar el mouse */
+}
+.custom-input {
+  background-color: #ccc7c1;
+  border: 1px solid black;
+  border-radius: 8px;
+  overflow: hidden; /* para que el contenido respete los bordes redondeados */
+}
+
+.custom-input .input-group-text,
+.custom-input .form-control {
+  background-color: #ccc7c1;
+  border: none;
+  border-radius: 0;
+  color: #495057;
+}
+
+.custom-input .form-control:focus {
+  box-shadow: none;
+  background-color: #ccc7c1;
+}
+
+.custom-input .input-group-text i {
+  color: #495057;
+}
+

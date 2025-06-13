@@ -1,0 +1,25 @@
+.register-wrapper {
+  background-image: url('../../../../assets/images/imagen.jpg'); /* ajustá el nombre si usás la misma imagen */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.register-card {
+  min-width: 350px;
+  background-color: rgba(255, 255, 255, 0.555); /* blanco translúcido */
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.btn-register {
+  background-color: #007bff; /* azul */
+  border-color: #007bff;
+  color: white;
+}
+
+.btn-register:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}
