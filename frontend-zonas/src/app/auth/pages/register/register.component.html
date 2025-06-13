@@ -1,0 +1,23 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card p-4 shadow" style="min-width: 400px;">
+    <h3 class="mb-3 text-center">Crear cuenta</h3>
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Nombre completo</label>
+        <input type="text" class="form-control" id="name" placeholder="Juan Pérez">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo electrónico</label>
+        <input type="email" class="form-control" id="email" placeholder="usuario@ejemplo.com">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="password" placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn btn-success w-100">Registrarse</button>
+      <div class="text-center mt-3">
+        <a routerLink="/login">¿Ya tenés cuenta? Iniciar sesión</a>
+      </div>
+    </form>
+  </div>
+</div>
