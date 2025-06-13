@@ -1,0 +1,25 @@
+.login-wrapper {
+  background-image: url('../../../../assets/images/imagen.jpg'); /* cambiá el path si es necesario */
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.login-card {
+  min-width: 350px;
+  background-color: rgba(255, 255, 255, 0.85); /* blanco con transparencia */
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.btn-login {
+  background-color: #e74c3c; /* rojo-anaranjado */
+  border-color: #e74c3c;
+  color: white;
+}
+
+.btn-login:hover {
+  background-color: #d8432b;
+  border-color: #d8432b;
+}
