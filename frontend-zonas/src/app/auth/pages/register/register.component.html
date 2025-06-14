@@ -3,19 +3,31 @@
     <div class="card register-card p-4 shadow">
       <h3 class="mb-3 text-center">Registrarse</h3>
       <form>
-        <div class="mb-3">
-          <input type="email" class="form-control" id="email" placeholder="Usuario" />
+        <div class="input-group mb-3 custom-input">
+          <span class="input-group-text">
+            <i class="bi bi-person-fill"></i>
+          </span>
+          <input type="email" class="form-control" placeholder="Usuario" />
         </div>
-        <div class="mb-3">
-          <input type="password" class="form-control" id="password" placeholder="Contraseña" />
+
+        <div class="input-group mb-3 custom-input">
+          <span class="input-group-text">
+            <i class="bi bi-lock-fill"></i>
+          </span>
+          <input type="password" class="form-control" placeholder="Contraseña" />
         </div>
-        <div class="mb-3">
-          <input type="password" class="form-control" id="confirmPassword" placeholder="Repetir Contraseña" />
+
+        <div class="input-group mb-3 custom-input">
+          <span class="input-group-text">
+            <i class="bi bi-lock-fill"></i>
+          </span>
+          <input type="password" class="form-control" placeholder="Repetir Contraseña" />
         </div>
+
         <button type="submit" class="btn btn-register w-100">Registrarse</button>
+
         <div class="text-center mt-3">
-          <a routerLink="/login">¿Ya tenés cuenta? Iniciar sesión</a>
-          <!--Esto tampoco está pero me parece chevere-->
+          <a routerLink="/auth/login">¿Ya tenés cuenta? Iniciar sesión</a>
         </div>
       </form>
     </div>
