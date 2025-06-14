@@ -1,0 +1,14 @@
+.home-wrapper {
+  background: url('../../../assets/images/home.avif') no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+}
+
+.home-card {
+  min-width: 400px;
+  max-width: 500px;
+  background-color: rgba(255, 255, 255, 0.555);
+  border-radius: 18px;
+  backdrop-filter: blur(4px);
+}
