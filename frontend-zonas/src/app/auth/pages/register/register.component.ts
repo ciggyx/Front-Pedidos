@@ -24,7 +24,6 @@ export class RegisterComponent {
   onSubmit(): void {
     if (this.registerForm.valid && this.passwordsMatch()) {
       this.router.navigate(['/home']);
-
     }
   }
 
