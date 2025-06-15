@@ -1,0 +1,47 @@
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-content">
+    <div class="left-section"></div>
+    <div class="right-section">
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle user-avatar-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="assets/images/12225773.png" alt="Usuario" class="user-avatar" />
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><a class="dropdown-item" href="#">Configuración</a></li>
+          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- LISTADO DELIVERIES -->
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-3 px-3">
+  @for (delivery of deliveries; track delivery.id) {
+    <div class="col">
+      <div class="card h-100 shadow-sm p-3 delivery-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex align-items-center">
+            <img src="assets/images/12225773.png" class="rounded-circle me-3" width="40" height="40" alt="Avatar" />
+            <div>
+              <h6 class="mb-0">{{ delivery.nombre }}</h6>
+              <small class="text-muted">ID: {{ delivery.personID }}</small>
+            </div>
+          </div>
+          <span class="badge bg-warning text-dark">{{ delivery.estado }}</span>
+        </div>
+
+        <p class="mb-2"><strong>Ubicación:</strong> {{ delivery.ubicacion.lat }}, {{ delivery.ubicacion.lng }}</p>
+
+        <div class="mt-auto d-flex gap-2">
+          <button class="btn btn-danger btn-sm w-100" (click)="deleteDelivery(delivery.id)">Eliminar</button>
+          <button class="btn btn-warning btn-sm w-100" (click)="updateStatus(delivery.id)">Actualizar estado</button>
+          <button class="btn btn-info btn-sm w-100" (click)="manageZones(delivery.id)">Administrar Zonas</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>
