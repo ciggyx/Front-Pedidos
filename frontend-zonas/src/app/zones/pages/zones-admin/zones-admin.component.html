@@ -1,0 +1,107 @@
+<div class="topbar">
+  <div class="topbar-content">
+    <div class="left-section"></div>
+    <div class="right-section">
+      <div class="dropdown">
+        <button class="btn btn-light dropdown-toggle user-avatar-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <img src="assets/images/12225773.png" alt="Usuario" class="user-avatar" />
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Perfil</a></li>
+          <li><a class="dropdown-item" href="#">Configuración</a></li>
+          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <!-- Búsqueda y filas por página -->
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="currentPage = 1" />
+    </div>
+    <div class="col-md-6 text-end">
+      Filas por página:
+      <select class="form-select d-inline-block w-auto" (change)="onPageSizeChange($event)" [value]="pageSize">
+        <option *ngFor="let n of [5,10,20,100]">{{n}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+   <div class="tabla-contenedor">
+  <table class="table table-hover align-middle">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Zona</th>
+        <th>Latitud</th>
+        <th>Longitud</th>
+        <th>Radio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let zona of paginatedZonas">
+        <td>
+          <img [src]="zona.imagen" class="rounded me-2" width="64" height="64">
+        </td>
+        <td><div class="form-control-plaintext nombre-zona" [attr.title]="zona.nombre">{{ zona.nombre }}</div></td>
+        <td><div class="form-control-plaintext">{{ zona.lat }}</div></td>
+        <td><div class="form-control-plaintext">{{ zona.lng }}</div></td>
+        <td><div class="form-control-plaintext">{{ zona.radio }}</div></td>
+        <td class="botones-zona">
+          <button class="btn btn-sm btn-fixed btn-editar mb-1" (click)="editar(zona)">Editar</button>
+          <button class="btn btn-sm btn-fixed btn-eliminar" (click)="eliminar(zona)">Eliminar</button>
+        </td>
+      </tr>
+      <tr *ngIf="!filteredZonas.length">
+        <td colspan="6" class="text-center">No se encontraron resultados</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+  <!-- Paginación -->
+  <nav *ngIf="totalPages > 1" aria-label="Paginación">
+  <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
+
+    <button
+      class="btn btn-arrows"
+      (click)="goToPreviousPage()"
+      [disabled]="currentPage === 1"
+      aria-label="Página anterior">
+      &lt;
+    </button>
+
+    <label for="pagina" class="mb-0">Página:</label>
+    <input
+      id="pagina"
+      class="text-center"
+      style="width: 60px;"
+      [value]="currentPage"
+      (change)="onPageInputChange($event)"
+      [min]="1"
+      [max]="totalPages"
+    />
+    <span class="ms-1">/ {{ totalPages }}</span>
+
+    <button
+      class="btn btn-arrows"
+      (click)="goToNextPage()"
+      [disabled]="currentPage === totalPages"
+      aria-label="Página siguiente">
+      &gt;
+    </button>
+
+  </div>
+</nav>
+
+</div>
