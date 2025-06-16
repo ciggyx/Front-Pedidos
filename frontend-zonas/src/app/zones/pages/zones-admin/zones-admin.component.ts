@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 interface Zona {
   nombre: string;
@@ -10,6 +12,8 @@ interface Zona {
 
 @Component({
   selector: 'app-zonas',
+  standalone: true,
+  imports: [CommonModule, FormsModule],
   templateUrl: './zones-admin.component.html',
   styleUrls: ['./zones-admin.component.css']
 })
