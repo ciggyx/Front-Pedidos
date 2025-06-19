@@ -58,7 +58,7 @@
         <td><div class="form-control-plaintext">{{ zona.lng }}</div></td>
         <td><div class="form-control-plaintext">{{ zona.radio }}</div></td>
         <td class="botones-zona">
-          <button class="btn btn-sm btn-fixed btn-editar mb-1" (click)="editar(zona)">Editar</button>
+          <button class="btn btn-sm btn-fixed btn-editar mb-1" (click)="goToEditZone(zona.id)">Editar</button>
           <button class="btn btn-sm btn-fixed btn-eliminar" (click)="eliminar(zona)">Eliminar</button>
         </td>
       </tr>
