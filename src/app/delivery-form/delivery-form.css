@@ -1,0 +1,16 @@
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-avatar-btn {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.user-avatar-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
