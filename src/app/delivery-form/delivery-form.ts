@@ -56,7 +56,9 @@ export class DeliveryFormComponent implements OnInit {
       ]),
     });
   }
-
+  goHome() {
+  this.router.navigate(['/home']);
+  }
   get f() {
     return this.deliveryForm.controls;
   }
@@ -113,8 +115,8 @@ export class DeliveryFormComponent implements OnInit {
   }
 
   // Método para manejar la navegación de vuelta si el usuario cancela
-  goBack(): void {
-    this.router.navigate(['/deliveries']);
+  cancel() {
+  this.router.navigate(['home/deliveryList']);
   }
 }
 

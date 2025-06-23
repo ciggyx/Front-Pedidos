@@ -72,6 +72,7 @@ export class DeliveryComponent implements OnInit {
         });
     }
   }
+  
 
   updateStatus(id: number, currentStatusId: number) {
   const newStatusId = currentStatusId === 1 ? 2 : 1;
