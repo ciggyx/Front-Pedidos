@@ -56,49 +56,51 @@ export class DeliveryComponent implements OnInit {
   }
 
   deleteDelivery(id: number) {
-    if (confirm('¿Estás seguro de que quieres eliminar esta entrega?')) {
+    if (confirm('¿Estás seguro de que quieres eliminar este delivery?')) {
       this.deliveriesService
         .deleteDelivery(id)
         .pipe(
           catchError((err) => {
             console.error('Error al eliminar delivery:', err);
-            alert('Error al eliminar la entrega.');
+            alert('Error al eliminar el delivery.');
             return of(null);
           }),
         )
         .subscribe(() => {
           this.deliveries = this.deliveries.filter((d) => d.id !== id);
-          alert('Entrega eliminada con éxito.');
+          alert('Delivery eliminada con éxito.');
         });
     }
   }
 
-  updateStatus(id: number, currentStatusName: string) {
-    // Asegúrate que los nombres de estado aquí coincidan con los de tu backend
-    const newStatusName =
-      currentStatusName === 'Avaible' ? 'In Route' : 'Avaible';
-    const updateDto = { status: newStatusName };
+  updateStatus(id: number, currentStatusId: number) {
+  const newStatusId = currentStatusId === 1 ? 2 : 1;
+  const updateDto = { statusId: newStatusId };
 
-    this.deliveriesService
-      .updateDeliveryStatus(id, updateDto)
-      .pipe(
-        catchError((err) => {
-          console.error('Error al actualizar estado:', err);
-          alert('Error al actualizar el estado de la entrega.');
-          return of(null);
-        }),
-      )
-      .subscribe((response) => {
-        if (response) {
-          const index = this.deliveries.findIndex((d) => d.id === id);
-          if (index !== -1) {
-            // Asumiendo que response.status tiene el nuevo nombre del estado
-            this.deliveries[index].status.name = response.status;
-            alert('Estado de entrega actualizado con éxito.');
-          }
+  this.deliveriesService
+    .updateDeliveryStatus(id, updateDto)
+    .pipe(
+      catchError((err) => {
+        console.error('Error al actualizar estado:', err);
+        alert('Error al actualizar el estado del delivery.');
+        return of(null);
+      }),
+    )
+    .subscribe((response) => {
+      if (response) {
+        const index = this.deliveries.findIndex((d) => d.id === id);
+        if (index !== -1) {
+          this.deliveries[index].status = {
+           id: newStatusId,
+           name: response.status.name
+};
+
+          alert('Estado del delivery actualizado con éxito.');
         }
-      });
-  }
+      }
+    });
+}
+
 
   manageZones(id: number) {
     console.log('Administrar zonas del delivery con ID:', id);

@@ -92,16 +92,16 @@ export class DeliveryFormComponent implements OnInit {
       .createDelivery(newDelivery)
       .pipe(
         catchError((err) => {
-          console.error('Error al crear entrega:', err);
+          console.error('Error al crear delivery:', err);
           this.errorMessage =
-            'Error al crear la entrega. Por favor, intente de nuevo.';
+            'Error al crear el delivery. Por favor, intente de nuevo.';
           this.isSubmitting = false;
           return of(null);
         }),
       )
       .subscribe((response) => {
         if (response) {
-          this.successMessage = 'Entrega creada exitosamente.';
+          this.successMessage = 'Delivery creado exitosamente.';
           this.deliveryForm.reset(); // Limpia el formulario
           // navega a la lista de entregas
           setTimeout(() => {
