@@ -42,5 +42,5 @@ export interface UpdateLocationDto {
 }
 
 export interface UpdateStatusDto {
-  status: string; // Tu backend espera el nombre del estado
+  statusId: number; // Tu backend espera el nombre del estado
 }

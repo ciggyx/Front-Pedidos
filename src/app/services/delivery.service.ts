@@ -50,7 +50,7 @@ export class DeliveriesService {
     id: number,
     updateStatusDto: UpdateStatusDto,
   ): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${id}/status`, updateStatusDto);
+    return this.http.put<any>(`${this.apiUrl}/${id}/status`, updateStatusDto);
   }
 
   deleteDelivery(id: number): Observable<void> {
