@@ -1,38 +1,49 @@
-import { Component } from '@angular/core';
+// src/app/pages/delivery/delivery.component.ts
+import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { DeliveriesService } from '../../services/delivery.service';
+import { Delivery, Zone } from '../../interfaces/delivery.interface';
+import { catchError, of } from 'rxjs';
 
 @Component({
   selector: 'app-delivery',
-  templateUrl: 'delivery.component.html',
-  styleUrls: ['delivery.component.css'],
-  imports: [RouterModule]
+  templateUrl: './delivery.component.html',
+  styleUrls: ['./delivery.component.css'],
+  standalone: true,
+  imports: [RouterModule, CommonModule],
 })
-export class DeliveryComponent {
+export class DeliveryComponent implements OnInit {
   menuOpen = false;
+  deliveries: Delivery[] = [];
+  isLoading = true;
+  error: string | null = null;
 
-  deliveries = [
-    {
-      id: 1,
-      nombre: 'Valentín',
-      ubicacion: { lat: -31.4, lng: -64.2 },
-      estado: 'Avaible',
-      personID: '123014'
-    },
-    {
-      id: 2,
-      nombre: 'Ramiro',
-      ubicacion: { lat: -31.5, lng: -64.3 },
-      estado: 'In Route',
-      personID: '123015'
-    },
-    {
-      id: 3,
-      nombre: 'Dozer',
-      ubicacion: { lat: -31.5, lng: -64.3 },
-      estado: 'In Route',
-      personID: '123016'
-    }
-  ];
+  constructor(private deliveriesService: DeliveriesService) {}
+
+  ngOnInit(): void {
+    this.loadDeliveries();
+  }
+
+  loadDeliveries(): void {
+    this.isLoading = true;
+    this.error = null;
+    this.deliveriesService
+      .getAllDeliveries()
+      .pipe(
+        catchError((err) => {
+          console.error('Error al cargar deliveries:', err);
+          this.error =
+            'No se pudieron cargar las entregas. Intente de nuevo más tarde.';
+          this.isLoading = false;
+          return of([]);
+        }),
+      )
+      .subscribe((data: Delivery[]) => {
+        this.deliveries = data;
+        this.isLoading = false;
+      });
+  }
 
   toggleMenu() {
     this.menuOpen = !this.menuOpen;
@@ -45,20 +56,59 @@ export class DeliveryComponent {
   }
 
   deleteDelivery(id: number) {
-    console.log('Eliminar delivery con ID:', id);
-    this.deliveries = this.deliveries.filter(d => d.id !== id);
+    if (confirm('¿Estás seguro de que quieres eliminar esta entrega?')) {
+      this.deliveriesService
+        .deleteDelivery(id)
+        .pipe(
+          catchError((err) => {
+            console.error('Error al eliminar delivery:', err);
+            alert('Error al eliminar la entrega.');
+            return of(null);
+          }),
+        )
+        .subscribe(() => {
+          this.deliveries = this.deliveries.filter((d) => d.id !== id);
+          alert('Entrega eliminada con éxito.');
+        });
+    }
   }
 
-  updateStatus(id: number) {
-    console.log('Actualizar estado de delivery con ID:', id);
-    const delivery = this.deliveries.find(d => d.id === id);
-    if (delivery) {
-      delivery.estado = delivery.estado === 'Avaible' ? 'In Route' : 'Avaible';
-    }
+  updateStatus(id: number, currentStatusName: string) {
+    // Asegúrate que los nombres de estado aquí coincidan con los de tu backend
+    const newStatusName =
+      currentStatusName === 'Avaible' ? 'In Route' : 'Avaible';
+    const updateDto = { status: newStatusName };
+
+    this.deliveriesService
+      .updateDeliveryStatus(id, updateDto)
+      .pipe(
+        catchError((err) => {
+          console.error('Error al actualizar estado:', err);
+          alert('Error al actualizar el estado de la entrega.');
+          return of(null);
+        }),
+      )
+      .subscribe((response) => {
+        if (response) {
+          const index = this.deliveries.findIndex((d) => d.id === id);
+          if (index !== -1) {
+            // Asumiendo que response.status tiene el nuevo nombre del estado
+            this.deliveries[index].status.name = response.status;
+            alert('Estado de entrega actualizado con éxito.');
+          }
+        }
+      });
   }
 
   manageZones(id: number) {
     console.log('Administrar zonas del delivery con ID:', id);
-    // Aquí podrías navegar a otra ruta o abrir un modal
+  }
+
+  formatZones(zones: Zone[] | undefined): string {
+    if (!zones || zones.length === 0) {
+      return 'No hay zonas asignadas.';
+    }
+    return zones.map((zone) => zone.name).join(', ');
   }
 }
+
