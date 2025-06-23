@@ -36,16 +36,16 @@
 <div class="container mt-4">
   <h2>Listado de Delivery</h2>
   <button class="btn btn-primary mb-3" routerLink="/create-delivery">
-    Crear Nueva Entrega
+    Crear Nuevo Delivery
   </button>
 
   @if (isLoading) {
-    <div class="alert alert-info" role="alert">Cargando entregas...</div>
+    <div class="alert alert-info" role="alert">Cargando deliveries...</div>
   } @else if (error) {
     <div class="alert alert-danger" role="alert">{{ error }}</div>
   } @else if (deliveries.length === 0) {
     <div class="alert alert-warning" role="alert">
-      No hay entregas para mostrar.
+      No hay deliveries para mostrar.
     </div>
   } @else {
     <div class="row row-cols-1 row-cols-md-2 g-4 mt-3 px-3">
@@ -62,23 +62,24 @@
                   alt="Avatar"
                 />
                 <div>
-                  <h6 class="mb-0">Entrega ID: {{ delivery.id }}</h6>
+                  <h6 class="mb-0">Delivery ID: {{ delivery.id }}</h6>
                   <small class="text-muted"
                     >Person ID: {{ delivery.personId }}</small
                   >
                 </div>
               </div>
               <span
-                class="badge"
-                [ngClass]="{
-                  'bg-warning text-dark': delivery.status.name === 'Avaible',
-                  'bg-success': delivery.status.name === 'In Route',
-                  'bg-secondary':
-                    delivery.status.name !== 'Avaible' &&
-                    delivery.status.name !== 'In Route',
-                }"
-                >{{ delivery.status.name }}</span
-              >
+                  *ngIf="delivery.status?.name"
+                  class="badge"
+                  [ngClass]="{
+                    'bg-warning text-dark': delivery.status.name === 'available',
+                    'bg-success text-white': delivery.status.name === 'in_route',
+                    'bg-secondary': delivery.status.name !== 'available' && delivery.status.name !== 'in_route'
+                  }"
+                >
+                  {{ delivery.status.name | titlecase }}
+                </span>
+
             </div>
 
             <p class="mb-2">
@@ -99,10 +100,10 @@
               </button>
               <button
                 class="btn btn-warning btn-sm w-100"
-                (click)="updateStatus(delivery.id, delivery.status.name)"
-              >
+                (click)="updateStatus(delivery.id, delivery.status.id)">
                 Actualizar estado
               </button>
+
               <button
                 class="btn btn-info btn-sm w-100"
                 (click)="manageZones(delivery.id)"
