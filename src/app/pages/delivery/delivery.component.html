@@ -22,14 +22,10 @@
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="javascript:void(0)">Perfil</a></li>
           <li>
-            <a class="dropdown-item" href="javascript:void(0)"
-              >Configuración</a
-            >
+            <a class="dropdown-item" href="javascript:void(0)">Configuración</a>
           </li>
           <li>
-            <a class="dropdown-item" href="javascript:void(0)"
-              >Cerrar sesión</a
-            >
+            <a class="dropdown-item" href="javascript:void(0)">Cerrar sesión</a>
           </li>
         </ul>
       </div>
@@ -38,81 +34,86 @@
 </div>
 
 <div class="container mt-4">
-  <h2>Listado de Entregas</h2>
+  <h2>Listado de Delivery</h2>
   <button class="btn btn-primary mb-3" routerLink="/create-delivery">
     Crear Nueva Entrega
   </button>
 
   @if (isLoading) {
-  <div class="alert alert-info" role="alert">Cargando entregas...</div>
+    <div class="alert alert-info" role="alert">Cargando entregas...</div>
   } @else if (error) {
-  <div class="alert alert-danger" role="alert">{{ error }}</div>
+    <div class="alert alert-danger" role="alert">{{ error }}</div>
   } @else if (deliveries.length === 0) {
-  <div class="alert alert-warning" role="alert">
-    No hay entregas para mostrar.
-  </div>
+    <div class="alert alert-warning" role="alert">
+      No hay entregas para mostrar.
+    </div>
   } @else {
-  <div class="row row-cols-1 row-cols-md-2 g-4 mt-3 px-3">
-    @for (delivery of deliveries; track delivery.id) {
-    <div class="col">
-      <div class="card h-100 shadow-sm p-3 delivery-card">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <div class="d-flex align-items-center">
-            <img
-              src="assets/images/12225773.png"
-              class="rounded-circle me-3"
-              width="40"
-              height="40"
-              alt="Avatar"
-            />
-            <div>
-              <h6 class="mb-0">Entrega ID: {{ delivery.id }}</h6>
-              <small class="text-muted">Person ID: {{ delivery.personId }}</small>
+    <div class="row row-cols-1 row-cols-md-2 g-4 mt-3 px-3">
+      @for (delivery of deliveries; track delivery.id) {
+        <div class="col">
+          <div class="card h-100 shadow-sm p-3 delivery-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex align-items-center">
+                <img
+                  src="assets/images/12225773.png"
+                  class="rounded-circle me-3"
+                  width="40"
+                  height="40"
+                  alt="Avatar"
+                />
+                <div>
+                  <h6 class="mb-0">Entrega ID: {{ delivery.id }}</h6>
+                  <small class="text-muted"
+                    >Person ID: {{ delivery.personId }}</small
+                  >
+                </div>
+              </div>
+              <span
+                class="badge"
+                [ngClass]="{
+                  'bg-warning text-dark': delivery.status.name === 'Avaible',
+                  'bg-success': delivery.status.name === 'In Route',
+                  'bg-secondary':
+                    delivery.status.name !== 'Avaible' &&
+                    delivery.status.name !== 'In Route',
+                }"
+                >{{ delivery.status.name }}</span
+              >
+            </div>
+
+            <p class="mb-2">
+              <strong>Ubicación:</strong> {{ delivery.location.lat }},
+              {{ delivery.location.lng }}
+            </p>
+            <p class="mb-2"><strong>Radio:</strong> {{ delivery.radius }} km</p>
+            <p class="mb-2">
+              <strong>Zonas:</strong> {{ formatZones(delivery.zones) }}
+            </p>
+
+            <div class="mt-auto d-flex gap-2">
+              <button
+                class="btn btn-danger btn-sm w-100"
+                (click)="deleteDelivery(delivery.id)"
+              >
+                Eliminar
+              </button>
+              <button
+                class="btn btn-warning btn-sm w-100"
+                (click)="updateStatus(delivery.id, delivery.status.name)"
+              >
+                Actualizar estado
+              </button>
+              <button
+                class="btn btn-info btn-sm w-100"
+                (click)="manageZones(delivery.id)"
+              >
+                Administrar Zonas
+              </button>
             </div>
           </div>
-          <span
-            class="badge"
-            [ngClass]="{
-              'bg-warning text-dark': delivery.status.name === 'Avaible',
-              'bg-success': delivery.status.name === 'In Route',
-              'bg-secondary': delivery.status.name !== 'Avaible' && delivery.status.name !== 'In Route'
-            }"
-            >{{ delivery.status.name }}</span
-          >
         </div>
-
-        <p class="mb-2">
-          <strong>Ubicación:</strong> {{ delivery.location.lat }},
-          {{ delivery.location.lng }}
-        </p>
-        <p class="mb-2"><strong>Radio:</strong> {{ delivery.radius }} km</p>
-        <p class="mb-2">
-          <strong>Zonas:</strong> {{ formatZones(delivery.zones) }}
-        </p>
-
-        <div class="mt-auto d-flex gap-2">
-          <button
-            class="btn btn-danger btn-sm w-100"
-            (click)="deleteDelivery(delivery.id)"
-          >
-            Eliminar
-          </button>
-          <button
-            class="btn btn-warning btn-sm w-100"
-            (click)="updateStatus(delivery.id, delivery.status.name)"
-          >
-            Actualizar estado
-          </button>
-          <button
-            class="btn btn-info btn-sm w-100"
-            (click)="manageZones(delivery.id)"
-          >
-            Administrar Zonas
-          </button>
-        </div>
-      </div>
+      }
     </div>
-    }
-  </div>
   }
 </div>
+
