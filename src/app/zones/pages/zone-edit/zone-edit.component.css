@@ -40,3 +40,41 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   font-size: 14px;
 }
+
+h2 {
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-control:focus {
+  border-color: #DA4621;
+  box-shadow: 0 0 0 0.25rem rgba(218, 70, 33, 0.25);
+}
+
+.btn-success {
+  background-color: #28a745;
+  border-color: #28a745;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+  border-color: #1e7e34;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+}
+
+.spinner-border-sm {
+  margin-right: 5px;
+}

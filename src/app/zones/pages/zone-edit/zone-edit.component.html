@@ -1,10 +1,21 @@
 <div class="topbar">
   <div class="topbar-content">
-    <div class="left-section"></div>
+    <div class="left-section">
+      <a class="btn btn-outline-light" routerLink="/home">🏠 Home</a>
+    </div>
     <div class="right-section">
       <div class="dropdown">
-        <button class="btn btn-light dropdown-toggle user-avatar-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="assets/images/12225773.png" alt="Usuario" class="user-avatar" />
+        <button
+          class="btn btn-light dropdown-toggle user-avatar-btn"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="assets/images/12225773.png"
+            alt="Usuario"
+            class="user-avatar"
+          />
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
           <li><a class="dropdown-item" href="#">Perfil</a></li>
@@ -15,32 +26,116 @@
     </div>
   </div>
 </div>
-<div class="container mt-5">
-  <h4 class="mb-4 text-warning fw-bold">Editar zona #{{ zona?.id }}</h4>
 
-  <form (ngSubmit)="guardarCambios()" #formZona="ngForm">
+<div class="container mt-4">
+  <h2>Editar Zona</h2>
+
+  @if (isLoading) {
+    <div class="alert alert-info text-center">Cargando datos de la zona...</div>
+  } @else if (errorMessage) {
+    <div class="alert alert-danger mt-3" role="alert">{{ errorMessage }}</div>
+  } @else if (successMessage) {
+    <div class="alert alert-success mt-3" role="alert">{{ successMessage }}</div>
+  }
+
+  @if (!isLoading && !errorMessage) {
+  <form [formGroup]="zoneForm" (ngSubmit)="onSubmit()" class="mt-4">
     <div class="mb-3">
-      <label class="form-label">Nombre</label>
-      <input type="text" class="form-control" [(ngModel)]="zona.nombre" name="nombre" required>
+      <label for="name" class="form-label">Nombre de la Zona</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        class="form-control"
+        [class.is-invalid]="f['name'].invalid && f['name'].touched"
+      />
+      @if (f['name'].invalid && f['name'].touched) {
+        <div class="invalid-feedback">
+          @if (f['name'].errors?.['required']) {
+            <div>El Nombre de la Zona es requerido.</div>
+          } @if (f['name'].errors?.['minlength']) {
+            <div>El Nombre de la Zona debe tener al menos 3 caracteres.</div>
+          } @if (f['name'].errors?.['maxlength']) {
+            <div>El Nombre de la Zona no puede exceder los 50 caracteres.</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div formGroupName="location" class="mb-3 border p-3 rounded">
+      <h4>Ubicación</h4>
+      <div class="mb-3">
+        <label for="lat" class="form-label">Latitud</label>
+        <input
+          type="number"
+          id="lat"
+          formControlName="lat"
+          class="form-control"
+          [class.is-invalid]="latControl?.invalid && latControl?.touched"
+        />
+        @if (latControl?.invalid && latControl?.touched) {
+          <div class="invalid-feedback">
+            @if (latControl?.errors?.['required']) {
+              <div>La Latitud es requerida.</div>
+            } @if (latControl?.errors?.['min'] || latControl?.errors?.['max']) {
+              <div>La Latitud debe estar entre -90 y 90.</div>
+            }
+          </div>
+        }
+      </div>
+      <div class="mb-3">
+        <label for="lng" class="form-label">Longitud</label>
+        <input
+          type="number"
+          id="lng"
+          formControlName="lng"
+          class="form-control"
+          [class.is-invalid]="lngControl?.invalid && lngControl?.touched"
+        />
+        @if (lngControl?.invalid && lngControl?.touched) {
+          <div class="invalid-feedback">
+            @if (lngControl?.errors?.['required']) {
+              <div>La Longitud es requerida.</div>
+            } @if (lngControl?.errors?.['min'] || lngControl?.errors?.['max']) {
+              <div>La Longitud debe estar entre -180 y 180.</div>
+            }
+          </div>
+        }
+      </div>
     </div>
 
     <div class="mb-3">
-      <label class="form-label">Latitud</label>
-      <input type="number" class="form-control" [(ngModel)]="zona.lat" name="lat" required>
+      <label for="radius" class="form-label">Radio (km)</label>
+      <input
+        type="number"
+        id="radius"
+        formControlName="radius"
+        class="form-control"
+        [class.is-invalid]="f['radius'].invalid && f['radius'].touched"
+      />
+      @if (f['radius'].invalid && f['radius'].touched) {
+        <div class="invalid-feedback">
+          @if (f['radius'].errors?.['required']) {
+            <div>El Radio es requerido.</div>
+          } @if (f['radius'].errors?.['min'] || f['radius'].errors?.['max']) {
+            <div>El Radio debe ser un número entre 1 y 1000.</div>
+          }
+        </div>
+      }
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Longitud</label>
-      <input type="number" class="form-control" [(ngModel)]="zona.lng" name="lng" required>
-    </div>
-
-    <div class="mb-3">
-      <label class="form-label">Radio</label>
-      <input type="number" class="form-control" [(ngModel)]="zona.radio" name="radio" required>
-    </div>
-
-    <div class="text-center">
-      <button type="submit" class="btn btn-primary px-4">Confirmar</button>
-    </div>
+    <button type="submit" class="btn btn-success me-2" [disabled]="zoneForm.invalid || isSubmitting">
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+        [ngStyle]="{ 'display': isSubmitting ? 'inline-block' : 'none' }"
+      ></span>
+      Guardar Cambios
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="goBack()">
+      Cancelar
+    </button>
   </form>
+  }
 </div>

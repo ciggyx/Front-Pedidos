@@ -1,6 +1,7 @@
 <div class="topbar">
   <div class="topbar-content">
-    <div class="left-section"></div>
+    <div class="left-section">
+      <a class="btn btn-outline-light" routerLink="/home">🏠 Home</a> </div>
     <div class="right-section">
       <div class="dropdown">
         <button class="btn btn-light dropdown-toggle user-avatar-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -17,7 +18,14 @@
 </div>
 
 <div class="container mt-5">
-  <!-- Búsqueda y filas por página -->
+  <h2>Administración de Zonas</h2>
+
+  @if (isLoading) {
+    <div class="alert alert-info text-center">Cargando zonas...</div>
+  } @if (errorMessage) {
+    <div class="alert alert-danger mt-3" role="alert">{{ errorMessage }}</div>
+  }
+
   <div class="row mb-3 align-items-center">
     <div class="col-md-6">
       <input
@@ -35,73 +43,74 @@
     </div>
   </div>
 
-  <!-- Tabla -->
-   <div class="tabla-contenedor">
-  <table class="table table-hover align-middle">
-    <thead>
-      <tr>
-        <th></th>
-        <th>Zona</th>
-        <th>Latitud</th>
-        <th>Longitud</th>
-        <th>Radio</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let zona of paginatedZonas">
-        <td>
-          <img [src]="zona.imagen" class="rounded me-2" width="64" height="64">
-        </td>
-        <td><div class="form-control-plaintext nombre-zona" [attr.title]="zona.nombre">{{ zona.nombre }}</div></td>
-        <td><div class="form-control-plaintext">{{ zona.lat }}</div></td>
-        <td><div class="form-control-plaintext">{{ zona.lng }}</div></td>
-        <td><div class="form-control-plaintext">{{ zona.radio }}</div></td>
-        <td class="botones-zona">
-          <button class="btn btn-sm btn-fixed btn-editar mb-1" (click)="goToEditZone(zona.id)">Editar</button>
-          <button class="btn btn-sm btn-fixed btn-eliminar" (click)="eliminar(zona)">Eliminar</button>
-        </td>
-      </tr>
-      <tr *ngIf="!filteredZonas.length">
-        <td colspan="6" class="text-center">No se encontraron resultados</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-  <!-- Paginación -->
-  <nav *ngIf="totalPages > 1" aria-label="Paginación">
-  <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
-
-    <button
-      class="btn btn-arrows"
-      (click)="goToPreviousPage()"
-      [disabled]="currentPage === 1"
-      aria-label="Página anterior">
-      &lt;
-    </button>
-
-    <label for="pagina" class="mb-0">Página:</label>
-    <input
-      id="pagina"
-      class="text-center"
-      style="width: 60px;"
-      [value]="currentPage"
-      (change)="onPageInputChange($event)"
-      [min]="1"
-      [max]="totalPages"
-    />
-    <span class="ms-1">/ {{ totalPages }}</span>
-
-    <button
-      class="btn btn-arrows"
-      (click)="goToNextPage()"
-      [disabled]="currentPage === totalPages"
-      aria-label="Página siguiente">
-      &gt;
-    </button>
-
+  <div class="tabla-contenedor">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Zona</th>
+          <th>Latitud</th>
+          <th>Longitud</th>
+          <th>Radio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (zona of paginatedZonas; track zona.id) {
+          <tr>
+            <td>
+              <img src="assets/images/elpisoeslaburo.jpg" class="rounded me-2" width="64" height="64">
+            </td>
+            <td><div class="form-control-plaintext nombre-zona" [attr.title]="zona.name">{{ zona.name }}</div></td>
+            <td><div class="form-control-plaintext">{{ zona.location.lat }}</div></td>
+            <td><div class="form-control-plaintext">{{ zona.location.lng }}</div></td>
+            <td><div class="form-control-plaintext">{{ zona.radius }}</div></td>
+            <td class="botones-zona">
+              <button class="btn btn-sm btn-fixed btn-editar mb-1" (click)="goToEditZone(zona.id)">Editar</button>
+              <button class="btn btn-sm btn-fixed btn-eliminar" (click)="eliminar(zona)">Eliminar</button>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="6" class="text-center">No se encontraron resultados</td>
+          </tr>
+        }
+      </tbody>
+    </table>
   </div>
-</nav>
+
+  <nav *ngIf="totalPages > 1" aria-label="Paginación">
+    <div class="d-flex justify-content-center align-items-center gap-2 mt-3">
+
+      <button
+        class="btn btn-arrows"
+        (click)="goToPreviousPage()"
+        [disabled]="currentPage === 1"
+        aria-label="Página anterior">
+        &lt;
+      </button>
+
+      <label for="pagina" class="mb-0">Página:</label>
+      <input
+        id="pagina"
+        class="text-center"
+        style="width: 60px;"
+        [value]="currentPage"
+        (change)="onPageInputChange($event)"
+        [min]="1"
+        [max]="totalPages"
+      />
+      <span class="ms-1">/ {{ totalPages }}</span>
+
+      <button
+        class="btn btn-arrows"
+        (click)="goToNextPage()"
+        [disabled]="currentPage === totalPages"
+        aria-label="Página siguiente">
+        &gt;
+      </button>
+
+    </div>
+  </nav>
 
 </div>
