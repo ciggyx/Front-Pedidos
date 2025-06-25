@@ -5,11 +5,12 @@ import { ZonesService } from '../../../services/zone.service';
 import { Zone, UpdateZoneDto, ReplaceZoneDto } from '../../../interfaces/zone.interface';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs/operators';
+import { HeaderComponent } from '../../../header/header.component';
 
 @Component({
   selector: 'app-zone-edit',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
   templateUrl: './zone-edit.component.html',
   styleUrls: ['./zone-edit.component.css']
 })
@@ -36,7 +37,9 @@ export class ZoneEditComponent implements OnInit {
       radius: [null, [Validators.required, Validators.min(1), Validators.max(1000)]]
     });
   }
-
+  goHome() {
+    this.router.navigate(['/home']);
+  }
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       const idParam = params.get('id');

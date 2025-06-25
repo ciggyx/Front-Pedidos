@@ -5,13 +5,14 @@ import { CommonModule } from '@angular/common';
 import { DeliveriesService } from '../../services/delivery.service';
 import { Delivery, Zone } from '../../interfaces/delivery.interface';
 import { catchError, of } from 'rxjs';
+import { HeaderComponent } from '../../header/header.component';
 
 @Component({
   selector: 'app-delivery',
   templateUrl: './delivery.component.html',
   styleUrls: ['./delivery.component.css'],
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, HeaderComponent],
 })
 export class DeliveryComponent implements OnInit {
   menuOpen = false;

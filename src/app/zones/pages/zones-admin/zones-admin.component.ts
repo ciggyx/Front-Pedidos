@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { Zone } from '../../../interfaces/zone.interface'; 
 import { ZonesService } from '../../../services/zone.service'; 
 import { finalize } from 'rxjs/operators'; 
+import { HeaderComponent } from '../../../header/header.component';
 
 @Component({
   selector: 'app-zonas',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HeaderComponent],
   templateUrl: './zones-admin.component.html',
   styleUrls: ['./zones-admin.component.css']
 })
@@ -22,11 +23,10 @@ export class ZonesAdminComponent implements OnInit {
   errorMessage: string | null = null; 
 
   constructor(private router: Router, private zonesService: ZonesService) {} 
-
+  
   ngOnInit(): void {
     this.loadZonas(); 
   }
-
   loadZonas(): void {
     this.isLoading = true;
     this.errorMessage = null; 
