@@ -11,12 +11,15 @@
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          <img src="assets/images/12225773.png" alt="Usuario" class="user-avatar" />
+          <img [src]="profileImage || 'assets/images/12225773.png'" alt="Usuario" class="user-avatar"/>
         </button>
         <ul class="dropdown-menu dropdown-menu-end">
-          <li><a class="dropdown-item" href="#">Perfil</a></li>
-          <li><a class="dropdown-item" href="#">Configuración</a></li>
-          <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+          <li>
+            <a class="dropdown-item" (click)="goToPerfil()">Perfil</a>
+          </li>
+          <li>
+            <a class="dropdown-item" (click)="logout()">Cerrar sesión</a>
+          </li>
         </ul>
       </div>
     </div>
