@@ -1,0 +1,15 @@
+.form-card {
+  max-width: 600px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: #ffffffd2;
+  padding: 2rem;
+}
+
+.text-topbar-orange {
+  color: rgba(255, 102, 0, 1); /* Naranja sólido del encabezado */
+}
+
+.fw-bold {
+  font-weight: bold;
+}

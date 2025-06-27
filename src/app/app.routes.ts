@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { DeliveryComponent } from './pages/delivery/delivery.component';
 import { DeliveryFormComponent } from '../app/delivery-form/delivery-form';
+import { ProfileEditComponent } from './pages/profile-edit/profile-edit.component';
 import { AuthGuard } from './guards/auth.guard';
 AuthGuard;
 export const routes: Routes = [
@@ -37,8 +38,16 @@ export const routes: Routes = [
     canActivate: [AuthGuard], // Protege esta ruta perezosa también
   },
   {
+  path: 'perfil',
+  component: ProfileEditComponent,
+  canActivate: [AuthGuard], // si lo protegés con login
+  },
+
+  {
     path: '**',
     redirectTo: 'home',
   },
+
+
 ];
 
