@@ -1,0 +1,41 @@
+<!-- Header -->
+<app-header></app-header>
+
+<!-- Contenido principal -->
+<div class="container mt-5">
+  <div class="card p-4 shadow-lg form-card">
+    <h2 class="mb-4 text-center text-topbar-orange">Editar Perfil</h2>
+
+    <form>
+      <div class="mb-3">
+        <label for="profileImage" class="form-label fw-bold">Imagen de Perfil</label>
+        <input
+          type="file"
+          (change)="onImageSelected($event)"
+          class="form-control"
+          accept="image/*"
+        />
+      </div>
+
+      <div *ngIf="tempImage" class="mt-4 text-center">
+            <h5 class="fw-bold">Vista previa:</h5>
+            <img
+                [src]="tempImage"
+                class="img-thumbnail mx-auto d-block"
+                style="max-width: 150px;"
+            />
+            </div>
+
+
+    <div class="d-flex gap-2 mt-4 justify-content-center">
+        <button type="button" class="btn btn-danger" (click)="cancel()">
+            Cancelar
+        </button>
+
+        <button type="button" class="btn btn-success" (click)="confirm()">
+            Confirmar
+        </button>
+    </div>
+    </form>
+  </div>
+</div>

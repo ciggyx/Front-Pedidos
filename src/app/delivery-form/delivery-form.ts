@@ -11,13 +11,14 @@ import { Router } from '@angular/router';
 import { DeliveriesService } from '../services/delivery.service';
 import { CreateDeliveryDto } from '../interfaces/delivery.interface';
 import { catchError, of } from 'rxjs';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-delivery-form',
   templateUrl: './delivery-form.html',
   styleUrls: ['./delivery-form.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
 })
 export class DeliveryFormComponent implements OnInit {
   deliveryForm!: FormGroup; //  "!" inicia ngOnInit
@@ -56,7 +57,9 @@ export class DeliveryFormComponent implements OnInit {
       ]),
     });
   }
-
+  goHome() {
+  this.router.navigate(['/home']);
+  }
   get f() {
     return this.deliveryForm.controls;
   }
@@ -113,8 +116,8 @@ export class DeliveryFormComponent implements OnInit {
   }
 
   // Método para manejar la navegación de vuelta si el usuario cancela
-  goBack(): void {
-    this.router.navigate(['/deliveries']);
+  cancel() {
+  this.router.navigate(['home/deliveryList']);
   }
 }
 
