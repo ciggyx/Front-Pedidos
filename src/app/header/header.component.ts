@@ -11,14 +11,10 @@ import { CommonModule } from '@angular/common';
 
   imports:[CommonModule]
 })
+
 export class HeaderComponent {
   constructor(private router: Router) {}
   profileImage: string | null = null;
-
-})
-export class HeaderComponent {
-  constructor(private router: Router) {}
-
   goHome() {
     this.router.navigate(['/home']);
   }
@@ -31,4 +27,4 @@ export class HeaderComponent {
   ngOnInit(): void {
     this.profileImage = localStorage.getItem('profileImage');
   }
-
+}
