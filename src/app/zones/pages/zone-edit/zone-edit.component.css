@@ -1,42 +1,22 @@
-.topbar {
-  background-color: #DA4621;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
+/* Formulario igual al de delivery */
+.form-card {
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: #ffffffd2; /* blanco semitransparente */
+  padding: 2rem;
 }
 
-.topbar-content {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* Título con color naranja del topbar */
+/* Topbar estilo delivery */
+
+
+/* Bordes suaves y consistentes */
+.bg-light-subtle {
+  background-color: #f8f9fa;
 }
 
-.right-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.user-avatar-btn {
-  padding: 0;
-  border: none;
-  background: transparent;
-}
-
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-  background-color: #D0E4F5;
-  padding: 2px;
-}
-
-.dropdown-menu {
-  min-width: 160px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  font-size: 14px;
+/* Spinner alineado */
+.spinner-border-sm {
+  margin-right: 5px;
 }

@@ -1,16 +1,20 @@
-.user-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
 
-.user-avatar-btn {
-  padding: 0;
-  border: none;
-  background-color: transparent;
+/* Formulario */
+.form-card {
+  max-width: 700px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: #ffffffd2;
+  padding: 2rem;
 }
-
-.user-avatar-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
+/* Botón rojo */
+.btn-red {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
+  font-weight: 600;
+}
+.btn-red:hover {
+  background-color: #c82333;
+  border-color: #bd2130;
 }
