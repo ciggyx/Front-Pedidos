@@ -35,7 +35,7 @@ export class DeliveryComponent implements OnInit {
         catchError((err) => {
           console.error('Error al cargar deliveries:', err);
           this.error =
-            'No se pudieron cargar las entregas. Intente de nuevo más tarde.';
+            'No se pudieron cargar los delivery. Intente de nuevo más tarde.';
           this.isLoading = false;
           return of([]);
         }),
